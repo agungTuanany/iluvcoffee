@@ -7,17 +7,17 @@ import { Coffee } from "./entities/coffee.entity";
 import { Flavor } from "./entities/flavor.entity";
 import { Event } from "../events/entities/event.entity";
 
-// value based providers
-class MockCoffeesService {}
+// non class based providers
+import { COFFEE_BRANDS } from "./coffees.constants";
 
 @Module({
     imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
     controllers: [CoffeesController],
     providers: [
+        CoffeesService,
         {
-            provide: CoffeesService,
-            // useClass: CoffeesService
-            useValue: new MockCoffeesService(),
+            provide: COFFEE_BRANDS,
+            useValue: ["Salemba brew", "nestcafe"],
         },
     ],
     exports: [CoffeesService],
