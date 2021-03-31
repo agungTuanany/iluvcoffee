@@ -10,6 +10,11 @@ import { Event } from "../events/entities/event.entity";
 // non class based providers
 import { COFFEE_BRANDS } from "./coffees.constants";
 
+// use class based providers
+class ConfigService {}
+class DevelopmentConfigService {}
+class ProductionConfigService {}
+
 @Module({
     imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
     controllers: [CoffeesController],
@@ -18,6 +23,10 @@ import { COFFEE_BRANDS } from "./coffees.constants";
         {
             provide: COFFEE_BRANDS,
             useValue: ["Salemba brew", "nestcafe"],
+        },
+        {
+            provide: ConfigService,
+            useClass: process.env.NODE_ENV === "development" ? DevelopmentConfigService : ProductionConfigService,
         },
     ],
     exports: [CoffeesService],
