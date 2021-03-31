@@ -18,9 +18,9 @@ import { CoffeeRatingModule } from "./coffee-rating/coffee-rating.module";
             // database: "postgres",
             database: "postgres1",
             autoLoadEntities: true,
-            synchronize: true,      // COMMENT THIS in production - mode
+            synchronize: true, // COMMENT THIS in production - mode
         }),
-        CoffeeRatingModule
+        CoffeeRatingModule,
     ],
     controllers: [AppController],
     providers: [AppService],
