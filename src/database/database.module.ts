@@ -22,9 +22,8 @@ import { createConnection, ConnectionOptions } from "typeorm";
 /*-- dynamic module --*/
 @Module({})
 export class DatabaseModule {
-
     static register(options: ConnectionOptions): DynamicModule {
-        console.log("[!] dynamic module instantiated");
+        console.log("[!] DatabaseModule - dynamic module instantiated");
         return {
             module: DatabaseModule,
             providers: [

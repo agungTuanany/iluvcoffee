@@ -1,4 +1,4 @@
-import { Injectable, Inject, NotFoundException } from "@nestjs/common";
+import { Injectable, Inject, NotFoundException, Scope } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Connection, Repository } from "typeorm";
 
@@ -12,7 +12,8 @@ import { Event } from "../events/entities/event.entity";
 // non class based providers
 import { COFFEE_BRANDS } from "./coffees.constants";
 
-@Injectable()
+/*-- default provider - scope --*/
+@Injectable({ scope: Scope.DEFAULT })
 export class CoffeesService {
     //private coffees: Coffee[] = [
     //    //{{{
