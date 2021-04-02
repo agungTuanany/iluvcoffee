@@ -12,8 +12,14 @@ import { Event } from "../events/entities/event.entity";
 // non class based providers
 import { COFFEE_BRANDS } from "./coffees.constants";
 
-/*-- default provider - scope --*/
-@Injectable({ scope: Scope.DEFAULT })
+//{{{ /*-- provider - scopes --/
+/* default provider - scope */
+//@Injectable({ scope: Scope.DEFAULT })
+
+//}}}
+
+/*-- transient provider - scope --*/
+@Injectable({ scope: Scope.TRANSIENT })
 export class CoffeesService {
     //private coffees: Coffee[] = [
     //    //{{{
@@ -35,7 +41,7 @@ export class CoffeesService {
         @Inject(COFFEE_BRANDS)
         coffeeBrands: string[],
     ) {
-        console.log(coffeeBrands);
+        console.log("[!!] CoffeesService instantiated");
     } //}}}
 
     findAll(paginationQuery: PaginationQueryDto) {
