@@ -1,6 +1,5 @@
 import { Injectable, Module, Scope } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Connection } from "typeorm";
 
 import { CoffeesController } from "./coffees.controller";
 import { CoffeesService } from "./coffees.service";
@@ -29,10 +28,11 @@ export class CoffeeBrandsFactory {
         CoffeeBrandsFactory,
         {
             provide: COFFEE_BRANDS,
-            useFactory: () =>  ["Salemba brew", "nestcafe"],
+            useFactory: () => ["Salemba brew", "nestcafe"],
             scope: Scope.TRANSIENT,
         },
 
+        //{{{ factory based providers
         /* -- OR -- */
         // {
         //     provide: COFFEE_BRANDS,
@@ -46,6 +46,8 @@ export class CoffeeBrandsFactory {
         //     scope: Scope.TRANSIENT,
         //     inject: [Connection],
         // },
+        // }}}
+
     ],
     exports: [CoffeesService],
 })

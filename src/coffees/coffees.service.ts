@@ -20,20 +20,13 @@ import { COFFEE_BRANDS } from "./coffees.constants";
 /* 'transient' provider - scope */
 //@Injectable({ scope: Scope.TRANSIENT })
 
+/* 'request' provider - scope */
+//@Injectable({ scope: Scope.REQUEST })
+
 //}}}
 
-@Injectable()
+@Injectable({ scope: Scope.REQUEST })
 export class CoffeesService {
-    //private coffees: Coffee[] = [
-    //    //{{{
-    //    {
-    //        id: 1,
-    //        name: "Salemba Roast",
-    //        brand: "Salemba Brand",
-    //        flavors: ["chocolate", "vanilla"],
-    //    },
-    //]; //}}}
-
     constructor(
         //{{{
         @InjectRepository(Coffee)
