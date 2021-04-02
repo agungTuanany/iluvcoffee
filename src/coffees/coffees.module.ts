@@ -1,4 +1,4 @@
-import { Injectable, Module } from "@nestjs/common";
+import { Injectable, Module, Scope } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Connection } from "typeorm";
 
@@ -27,23 +27,25 @@ export class CoffeeBrandsFactory {
     providers: [
         CoffeesService,
         CoffeeBrandsFactory,
-        // {
-        //     provide: COFFEE_BRANDS,
-        //     useFactory: () =>  ["Salemba brew", "nestcafe"],
-        // },
-
-        /* -- OR -- */
         {
             provide: COFFEE_BRANDS,
-            useFactory: async (connection: Connection): Promise<string[]> => {
-                // const coffeeBrands = await connection.query(`SELECT * ...`);
-                const coffeeBrands = await Promise.resolve(["Salemba brew", "nestcafe"]);
-
-                console.log("[!] async factory");
-                return coffeeBrands;
-            },
-            inject: [Connection],
+            useFactory: () =>  ["Salemba brew", "nestcafe"],
+            scope: Scope.TRANSIENT,
         },
+
+        /* -- OR -- */
+        // {
+        //     provide: COFFEE_BRANDS,
+        //     useFactory: async (connection: Connection): Promise<string[]> => {
+        //         // const coffeeBrands = await connection.query(`SELECT * ...`);
+        //         const coffeeBrands = await Promise.resolve(["Salemba brew", "nestcafe"]);
+
+        //         console.log("[!] async factory");
+        //         return coffeeBrands;
+        //     },
+        //     scope: Scope.TRANSIENT,
+        //     inject: [Connection],
+        // },
     ],
     exports: [CoffeesService],
 })

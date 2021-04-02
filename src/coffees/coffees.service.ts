@@ -13,13 +13,16 @@ import { Event } from "../events/entities/event.entity";
 import { COFFEE_BRANDS } from "./coffees.constants";
 
 //{{{ /*-- provider - scopes --/
-/* default provider - scope */
+
+/* 'default' provider - scope */
 //@Injectable({ scope: Scope.DEFAULT })
+
+/* 'transient' provider - scope */
+//@Injectable({ scope: Scope.TRANSIENT })
 
 //}}}
 
-/*-- transient provider - scope --*/
-@Injectable({ scope: Scope.TRANSIENT })
+@Injectable()
 export class CoffeesService {
     //private coffees: Coffee[] = [
     //    //{{{
