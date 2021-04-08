@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Body, Post, Patch, Delete, Query, Inject, ValidationPipe } from "@nestjs/common";
 import { REQUEST } from "@nestjs/core";
 import { Request } from "express";
+import { ApiForbiddenResponse, ApiTags } from "@nestjs/swagger";
 
 import { CoffeesService } from "./coffees.service";
 import { CreateCoffeeDto } from "./dto/create-coffee.dto";
@@ -10,11 +11,7 @@ import { Public } from "../common/decorators/public.decorator";
 import { ParseIntPipe } from "../common/pipes/parse-int.pipe";
 import { Protocol } from "../common/decorators/protocol.decorator";
 
-/*-- Global Pipes --*/
-// @UsePipes(ValidationPipe)
-/*-- Pipes on method --*/
-// @UsePipes(ValidationPipe())
-
+@ApiTags("coffees")
 @Controller("coffees")
 export class CoffeesController {
     constructor(
@@ -26,6 +23,7 @@ export class CoffeesController {
         console.log("[!!] CoffeesController created");
     } //}}}
 
+    @ApiForbiddenResponse({ description: "Forbidden" })
     @Public()
     @Get()
     async findAll(@Protocol("https") protocol: string, @Query() paginationQuery: PaginationQueryDto) {
